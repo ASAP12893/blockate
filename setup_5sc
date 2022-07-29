@@ -1,0 +1,85 @@
+local plrblacklist = {}
+
+local function getplrs()
+  local x = {}
+  for i, v in pairs(game.Players:GetPlayers()) do
+    if not table.find(plrblacklist, v.UserId) then
+      table.insert(x, v)
+    end
+  end
+  return x
+end
+
+local gears = {}
+
+local events = {
+  {
+    ["event"] = "Someone would be killed.",
+    ["timer"] = 5,
+    ["code"] = function()
+      game:GetService("ReplicatedStorage").Sockets.Command:InvokeServer("!kill "..getplrs()[math.random(1, #getplrs())].Name)
+    end
+  }
+}
+
+-- Loop
+while true do
+  pcall(function()
+  local picked = events[math.random(1, #events)]
+  for i = picked["timer"], 1, -1 do
+    game:GetService("ReplicatedStorage").Sockets.Command:InvokeServer(string.format("!shout "..i..[[
+
+
+
+
+
+
+
+]]..picked["event"]))
+    task.wait(1)
+  end
+  game:GetService("ReplicatedStorage").Sockets.Command:InvokeServer([[!shout 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.]])
+  picked["code"]()
+  task.wait(3)
+  end)
+end
